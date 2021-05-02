@@ -26,7 +26,7 @@ SECRET_KEY = '3egq1$=k-+t!j26ohpc@w_emohg%o+dp56ri7h!k-)@k1jjqqs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["covidhelpindia.pythonanywhere.com"]
+ALLOWED_HOSTS = ["covidhelpindia.pythonanywhere.com",'127.0.0.1']
 
 
 # Application definition
