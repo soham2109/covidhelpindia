@@ -1,0 +1,6 @@
+tweepy
+django==3.1.6
+pytz
+pandas
+numpy
+Pillow

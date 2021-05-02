@@ -1,0 +1,449 @@
+{% include 'sidebar.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+
+
+@media (max-width: 1000px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+  
+  .form-inline {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic);
+
+$size : 10rem;
+$border-width : .5rem;
+$radius : 1rem; /* try 50% */
+$transition : .3s;
+
+$bg : #F6F3E4;
+$green : #4BC35F;
+$red : #C15044;
+
+
+.roundrect {
+  .up { border-radius: 2rem 2rem 0 0; }
+  .down { border-radius: 0 0 2rem 2rem; }
+  .count { border-radius: .5rem .5rem; }
+}
+.chev {
+  .up { border-radius: 50% 50% 0 0; }
+  .down { border-radius: 0 0 50% 50%; }
+  .count { border-radius: 100%/50%; }
+}
+
+.circle {
+  .up { border-radius: $size $size 0 0; }
+  .down { border-radius: 0 0 $size $size; }
+  .count { border-radius: 50%; }
+}
+
+.vote {
+  display: flex;
+  flex-direction: column;
+  font-family: "Noto Sans";
+  position: relative;
+  width: $size;
+  height: $size;
+  margin: 1rem;
+}
+
+.increment {
+  flex: 1 0 0;
+  text-align: center;
+  opacity: .5;
+  transition: $transition;
+  cursor: pointer;
+  
+  &.up {
+    background: $green;
+    height: 50%;
+    margin-bottom: $border-width/2;
+  }
+  &.down {
+    background: $red;
+    height: 50%;
+  }
+  
+  &:hover {
+    opacity: 1;    
+  }
+}
+
+.count {
+  position: absolute;
+  top: 0;
+  border-radius: $radius*.1;
+  margin: $size*.25;
+  background: $bg;
+  width: $size*.5;
+  font-size: $size*.25;
+  font-weight: bold;
+  line-height: $size*.5;
+  text-align: center;
+  box-shadow: 0 0 0 $border-width $bg;
+  pointer-events: none;
+  
+  &.upvoted { color: $green; }
+  &.downvoted { color: $red; }
+}
+
+.bump {
+  animation: bump 200ms;
+}
+
+@keyframes bump {
+  30% { transform: scale(1.2); }
+}
+
+</style>
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <br>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">CovidHelp West Bengal</h1>
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Hospital Beds</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">120</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Remedesvir</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Oxygen Cylinders
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">30</div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                ICU Beds</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6 mb-4">
+
+                        <form class="form-inline">
+                            {% csrf_token %}
+                            <div class="card mb-4" style="width:100%;">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Select City</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="btn-block dropdown mb-4" >
+                                        <button class="btn btn-secondary dropdown-toggle " type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="true" style="width:100%;">
+                                            City
+                                        </button>
+                                        <div class="dropdown-menu" style="width:100%;"aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Kolkata</a>
+                                            <a class="dropdown-item" href="#">Siliguri</a>
+                                            <a class="dropdown-item" href="#">Durgapur</a>
+
+                                        </div>
+                                    </div>
+                                    <!-- Add the <code>.no-arrow</code> class alongside the <code>.dropdown</code> -->
+                                </div>
+                            </div>
+
+                        <div class="card mb-4" style="width:100%;">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Select Resource</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="btn-block dropdown mb-4" >
+                                        <button class="btn btn-secondary dropdown-toggle " type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="true" style="width:100%;">
+                                            Resource
+                                        </button>
+                                        <div class="dropdown-menu" style="width:100%;"aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Oxygen Cylinder/Concentrator</a>
+                                            <a class="dropdown-item" href="#">Hospital Bed</a>
+                                            <a class="dropdown-item" href="#">Remedesvir</a>
+                                            <a class="dropdown-item" href="#">Plasma Donation</a>
+                                            <a class="dropdown-item" href="#">Other Medicines</a>
+                                            <a class="dropdown-item" href="#">Other</a>
+                                        </div>
+                                    </div>
+                                    <!-- Add the <code>.no-arrow</code> class alongside the <code>.dropdown</code> -->
+                                </div>
+                            </div>
+                           <div class="card mb-4" style="width:100%;">
+                            <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Find Leads</h6>
+                                </div>
+                            <div class="card-body">
+                               <a href="#" class="btn btn-success btn-icon-split" >
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">Submit</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                              <div class="card shadow mb-4 col-xl-12">
+                        <div class="card-header py-3 col-xl-12">
+                            <h6 class="m-0 font-weight-bold text-primary">Recent Leads</h6>
+                        </div>
+                        <div class="card-body col-xl-12 col-md-6 mb-4">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Location</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            <th>Link</th>
+                                            <th>Resource</th>
+                                            <th>Contact</th>
+                                            <th>Added On</th>
+                                            <th>VoteUp</th>
+                                            <th>VoteDown</th>
+                                            <th>Rating</th>
+                                            <th>Reviews</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for obj in entries%}
+                                    <tr class="accordion-toggle collapsed"  >
+                                            
+                                            
+                                            <td width="10%">{{obj.city}}</td>
+                                            <td width="50%">{{obj.description}}</td>
+                                            <td width="10%">{{obj.image}}</td>
+                                            <td width="10%">{{obj.link}}</td>
+                                            <td width="10%">{{obj.resource}}</td>
+                                            <td width="10%">{{obj.contact}}</td>
+                                            <td width="10%">{{obj.added_on}}</td>
+                                            
+                                            <td width="10%"><a href="#" class="btn btn-success btn-circle">
+                                                <i class="fas fa-check"></i></a>
+                                    
+                                            </td>
+
+                                            <td width="10%"><a href="#" class="btn btn-warning btn-circle">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </a>                                            
+                                            </td>
+                                            <td>1</td>
+
+                                            <td width="10%"><button class="btn-primary" id="{{obj.id}}" data-toggle="collapse" data-parent="#{{obj.id}}" href="#{{obj.id}}">Reviews</button></td>
+                                        </tr>
+                                    
+                                    <tr class="hide-table-padding">
+                                        <td></td>
+                                        <td colspan="10">
+                                        <div id="{{obj.id}}" class="collapse in p-3">
+                                          <div class="row">
+                                            <div class="col-2">label</div>
+                                            <div class="col-6">value 1</div>
+                                          </div>
+                                        </div></td>
+                                    </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                     
+                        
+
+                    </div>
+
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Illustrations -->
+                        
+
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; CovidHelp 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+$(function(){
+  $(".increment").click(function(){
+    var count = parseInt($("~ .count", this).text());
+    
+    if($(this).hasClass("up")) {
+      var count = count + 1;
+      
+       $("~ .count", this).text(count);
+    } else {
+      var count = count - 1;
+       $("~ .count", this).text(count);     
+    }
+    
+    $(this).parent().addClass("bump");
+    
+    setTimeout(function(){
+      $(this).parent().removeClass("bump");    
+    }, 400);
+  });
+});
+</script>
+{% endblock %}
