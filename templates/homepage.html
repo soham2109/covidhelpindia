@@ -139,14 +139,15 @@ $red : #C15044;
                     <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
+                        {% for item in resource_counts %}
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Hospital Beds</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">120</div>
+                                                {{item.resource}}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{item.dcount}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -155,71 +156,9 @@ $red : #C15044;
                                 </div>
                             </div>
                         </div>
-
+                        {% endfor %}
                         <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Remedesvir</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Oxygen Cylinders
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">30</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                ICU Beds</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <!-- Content Row -->
@@ -314,7 +253,8 @@ $red : #C15044;
 
                         <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3 col-xl-12">
-                            <h6 class="m-0 font-weight-bold text-primary">Recent Leads</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Recent Leads - <!-- <h4 class="m-0 font-weight-bold text-info">Please upvote or downvote the leads as per your experience. This will help other users as well</h4 > --></h6>
+
                         </div>
                         <div class="card-body col-xl-12 col-md-6 mb-4">
                             <div class="table-responsive">
@@ -329,10 +269,10 @@ $red : #C15044;
                                             <th>Resource</th>
                                             <th>Contact</th>
                                             <th>Added On</th>
-                                            <th>VoteUp</th>
+                                            <!-- <th>VoteUp</th>
                                             <th>VoteDown</th>
-                                            <th>Rating</th>
-                                            <th>Reviews</th>
+                                            <th>Rating</th> -->
+                                            <!-- <th>Reviews</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -342,14 +282,14 @@ $red : #C15044;
                                             
                                             <td width="10%">{{obj.city}}</td>
                                             <td width="50%">{{obj.description}}</td>
-                                            <td width="10%">{{obj.image}}</td>
-                                            <td width="10%">{{obj.link}}</td>
+                                            <td width="10%"><a href="{{obj.link}}">{{obj.image}}</a></td>
+                                            <td width="10%"><a href="{{obj.link}}">{{obj.link}}</a></td>
                                             <td width="10%">{{obj.resource}}</td>
                                             <td width="10%">{{obj.contact}}</td>
                                             <td width="10%">{{obj.added_on}}</td>
                                             
-                                            <td width="10%"><a href="#" class="btn btn-success btn-circle">
-                                                <i class="fas fa-check"></i></a>
+                                            <!-- <td width="10%"><button class="btn btn-success btn-circle" onclick="upvote_func({{obj.id}});"><a href="#" >
+                                                <i class="fas fa-check"></i></a></button>
                                     
                                             </td>
 
@@ -357,9 +297,9 @@ $red : #C15044;
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </a>                                            
                                             </td>
-                                            <td>1</td>
+                                            <td>{{obj.rating}}</td> -->
 
-                                            <td width="10%"><button class="btn-primary" id="{{obj.id}}" data-toggle="collapse" data-parent="#{{obj.id}}" href="#{{obj.id}}">Reviews</button></td>
+                                            <!-- <td width="10%"><button class="btn-primary" id="{{obj.id}}" data-toggle="collapse" data-parent="#{{obj.id}}" href="#{{obj.id}}">Reviews</button></td>
                                         </tr>
                                     
                                     <tr class="hide-table-padding">
@@ -371,7 +311,7 @@ $red : #C15044;
                                             <div class="col-6">value 1</div>
                                           </div>
                                         </div></td>
-                                    </tr>
+                                    </tr> -->
 
                                     {% endfor %}
                                     </tbody>
