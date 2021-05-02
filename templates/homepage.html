@@ -227,7 +227,7 @@ $red : #C15044;
                     <div class="row">
                         <div class="col-xl-4 col-md-6 mb-4">
 
-                        <form class="form-inline">
+                        <form class="form-inline" action="/submit/" method="POST">
                             {% csrf_token %}
                             <div class="card mb-4" style="width:100%;">
                                 <div class="card-header py-3">
@@ -241,9 +241,9 @@ $red : #C15044;
                                             City
                                         </button> -->
                                         <select class="btn btn-secondary dropdown-toggle col-xl-10" name="city">
-                                            <option value="Kolkata">Kolkata</a>
-                                            <option value="Siliguri">Siliguri</a>
-                                            <option value="Durgapur">Durgapur</a>
+                                            {%for cities in cities %}
+                                            <option value="{{cities.city}}">{{cities.city}}</option>
+                                            {% endfor %}
 
                                         </select>
                                     </div>
@@ -263,9 +263,9 @@ $red : #C15044;
                                             City
                                         </button> -->
                                         <select class="btn btn-secondary dropdown-toggle col-xl-10" name="resource">
-                                            <option value="Kolkata">Hospital</a>
-                                            <option value="Siliguri">Remedesvir</a>
-                                            <option value="Durgapur">Oxygen</a>
+                                            <option value="Hospital">Hospital</option>
+                                            <option value="Remedesvir">Remedesvir</option>
+                                            <option value="Oxygen">Oxygen</option>
 
                                         </select>
                                     </div>
@@ -277,17 +277,42 @@ $red : #C15044;
                                     <h6 class="m-0 font-weight-bold text-primary">Find Leads</h6>
                                 </div>
                             <div class="card-body">
-                               <a href="#" class="btn btn-success btn-icon-split" >
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">Submit</span>
-                                    </a>
+                               <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
                         </div>
-                              <div class="card shadow mb-4 col-xl-12">
+                        <div class="card col-6 col-sm-4" >
+                                <div class="card-header py-3 ">
+                                    <h6 class="m-0 font-weight-bold text-danger">Current Search</h6>
+                                </div>
+                                <div class="card-body  ">
+                                    {% if city %}
+                                  <h3 class="font-weight-bold text-primary"> Displaying results for city: </h3>
+                                  <h3 class="font-weight-bold text-danger">{{city}}</h3>
+                                  <h3 class="font-weight-bold text-primary"> Resource: </h3>
+                                  <h3 class="font-weight-bold text-danger">{{resource}}</h3>
+                                    {% endif %}
+                                    <!-- Add the <code>.no-arrow</code> class alongside the <code>.dropdown</code> -->
+                                </div>
+                            </div>
+                        <div class="card  col-6 col-sm-4" >
+                                <div class="card-header py-3 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Disclaimer</h6>
+                                </div>
+                                <div class="card-body col-xl-12 col-md-6 mb-4 ">
+                                    
+                                  <h3 class="font-weight-bold text-info"> The information presented on this page are collected voluntarily and is verified to the best of our ability. We cannot guarantee that there are no errors or mistakes. We assume no responsibility or liability for any errors or omissions in the content of this site </h3>
+                                    <!-- Add the <code>.no-arrow</code> class alongside the <code>.dropdown</code> -->
+                                </div>
+                            </div>
+                     
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3 col-xl-12">
                             <h6 class="m-0 font-weight-bold text-primary">Recent Leads</h6>
                         </div>
@@ -356,12 +381,6 @@ $red : #C15044;
                             </div>
                         </div>
                     </div>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                     
                         
 
                     </div>
