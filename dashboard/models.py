@@ -31,3 +31,8 @@ class resource_entry(models.Model):
     added_on=models.DateTimeField(auto_now_add=True)
     rating=models.CharField(max_length=100,default=0)
     source =models.CharField(max_length=100,blank=True)
+
+
+    class Meta:
+
+        db_table = "resource_entry"
