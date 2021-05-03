@@ -27,7 +27,7 @@ class resource_entry(models.Model):
     image=models.ImageField(upload_to ='uploads/',blank=True) 
     links=models.CharField(max_length=100,blank=True    )
     #resource=models.CharField(max_length=100) #will be uploaded by office
-    contact = models.CharField(max_length=100,blank=True) #will be uploaded by office
+    contact = models.CharField(max_length=100,primary_key=True) #will be uploaded by office
     added_on=models.DateTimeField(auto_now_add=True)
     rating=models.CharField(max_length=100,default=0)
     source =models.CharField(max_length=100,blank=True)
